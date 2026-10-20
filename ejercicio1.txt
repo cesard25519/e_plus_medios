@@ -1,0 +1,29 @@
+
+EJERCICIO 1 — Diagnóstico
+Una tarea programada # chrono
+corre cada 10 minutos # 600
+en una Mac mini que funciona como servidor # problema especifico IOS?
+Su log muestra, ciclo tras ciclo, estas tres líneas:
+
+  2026-10-14 12:08:47 --- ciclo inicio ---
+  Failed to authenticate: OAuth session expired and could not be refreshed
+  2026-10-14 12:08:48 --- ciclo fin (exit 0) ---
+
+  """
+  2026-10-14 12:18:47 --- ciclo inicio ---
+  Failed to authenticate: OAuth session expired and could not be refreshed
+  2026-10-14 12:18:48 --- ciclo fin (exit 0) ---
+
+  2026-10-14 12:28:47 --- ciclo inicio ---
+  Failed to authenticate: OAuth session expired and could not be refreshed
+  2026-10-14 12:28:48 --- ciclo fin (exit 0) ---
+
+  ... # asi sucesivamente (?)
+  """
+
+El tablero de monitoreo marca la tarea en verde. # se ejecuta exitosamente por lo que podria ser problema del codigo fuente, a lo mejor una excepcion mal manejada
+a) ¿Qué está pasando y cómo averiguarías desde cuándo? # revision de logs buscando "OAuth session expired"
+b) ¿Qué harías hoy para arreglarlo? # re autenticarse? verificar script? re-hacer script (depende de que tan largo sea, muchas veces es mas sencillo hacer desde cero que intentar moverle)
+c) ¿Qué cambiarías para que una tarea que corre pero no hace nada nunca vuelva a aparecer en verde? # dependeria de que tan permisivos sean en el entorno
+
+
