@@ -1,10 +1,11 @@
-# === === === === === EJERCICIO 1 - Diagnóstico === === === === === #
+# EJERCICIO 1 - Diagnóstico
 
 Una tarea programada corre cada 10 minutos en una Mac mini que funciona como servidor. Su log muestra, ciclo tras ciclo, estas tres líneas:
 
 
 
-// === === === === === Formato y ejemplos === === === === === #
+### Formato y ejemplos
+
 <datetime.now> --- <msg> ---
 
 
@@ -26,7 +27,7 @@ Failed to authenticate: OAuth session expired and could not be refreshed
 
 
 
-# === === === === === El tablero de monitoreo marca la tarea en verde === === === === === #
+# El tablero de monitoreo marca la tarea en verde
 
 La tarea al ser marcada en verde, esta confirma que estuvo en lo esperado por lo tanto, posiblemente este se ejecute en un bloque "global" de excepciones similar a:
 
@@ -61,11 +62,11 @@ una mejora que personalmente haria seria algo como usar:
     res.raise_for_status()
 ```
 
-y con ello ahorraria problemas
+y con ello ahorraria problemas; eso suponiendo que es un script python, si es un script bash realmente no sabria que esperar en si
 
 
 
-# === === === === === a) ¿Qué está pasando y cómo averiguarías desde cuándo? === === === === === #
+# ¿Qué está pasando y cómo averiguarías desde cuándo?
 
 revisar logs buscando el print/log con algo como:
 ```python
@@ -75,30 +76,34 @@ revisar logs buscando el print/log con algo como:
             return
 ```
 
-o revisar usando utilidades unix como:
+o revisar usando utilidades unix (ya que es macos el sistema, con ello cercano a bsd) como:
+
 `grep 'Failed to authenticate' /ruta/al/log | head -n 1`
 
 
-si es sql usaria:
+si es sql usaria algo parecido a esto:
 ```sql
     SELECT * FROM logs
     WHERE msg lIKE '%Failed to authenticate%'
     ORDER BY date ASC
     LIMIT 1
+    -- suponiendo que asi sea el esquema pero lo ajustaria para hacerlo mas preciso y rapido
 ```
 
 
-# === === === === === b) ¿Qué harías hoy para arreglarlo? === === === === === #
+# ¿Qué harías hoy para arreglarlo?
 
-- podria hacer el proceso manualmente
-- re-hacer el script desde cero siendo cuidadoso en escribirlo
+- podria hacer el proceso manualmente y corregir cosas puntuales del script original
+- re-hacer el script desde cero siendo cuidadoso en escribirlo (si aplica)
 - re-autenticar el script
-- buscar con chatgpt/deepseek alguna solucion por si es problema del servidor
-
-personalmente primero intentaria hacer una autenticacion y probar, en caso de no funcionar, revisar el script para arreglarlo y ver si es problema del codigo fuente, en caso de no serlo a lo mejor podria ser el propio servidor al haber un cambio; esto dependera
+- buscar con chatgpt/deepseek alguna solucion por si es problema del servidor, del entorno, de como se hace la peticion o algun area especifica para poder encontrar el error mas rapidamente
 
 
-# === === === === ===  c) ¿Qué cambiarías para que una tarea que corre pero no hace nada nunca vuelva a aparecer en verde? === === === === === #
 
-volveria a escribir el script desde cero; dado que es un script, este posiblemente no pase de 200 LoC y con ello es algo bastante barato de escribir tanto manualmente como por un modelo ML
-tambien manejaria especificamente los casos que esperaria lanzando una excepcion ante algo extrano
+personalmente primero intentaria hacer una autenticacion y probar el script, en caso de no funcionar, revisar el script para arreglarlo y ver si es problema del codigo fuente, en caso de no serlo a lo mejor podria ser el propio servidor al haber un cambio; esto dependera; inclusive si se presta el script podria re-hacerlo desde cero para facilitar una implementacion mas precisa y con mejor calidad
+
+
+# ¿Qué cambiarías para que una tarea que corre pero no hace nada nunca vuelva a aparecer en verde?
+
+volveria a escribir el script desde cero; dado que es un script, este posiblemente no pase de 200 LoC lo cual es algo bastante barato de escribir tanto manualmente como por un modelo ML
+tambien manejaria especificamente los casos que esperaria lanzando una excepcion ante algo extrano para facilitar los problemas en lugar de imprimir/loggear cualquier error arbitrariamente

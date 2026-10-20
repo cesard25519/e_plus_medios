@@ -25,6 +25,7 @@ EJERCICIO 2 — Secretos
 Descubres que la contraseña de la base de datos de producción está escrita en un archivo de log que varias personas pueden leer, y que el proceso la sigue escribiendo en cada corrida.
 Describe, en orden, los pasos que darías en la primera hora y en la primera semana.
 
+
 EJERCICIO 3 — Script
 Escribe un script en Python (máximo 60 líneas) que reciba una lista de dominios de sitios WordPress, verifique para cada uno que el sitio responde y que su nota más reciente tiene menos de 24 horas (la API pública de WordPress está en /wp-json/wp/v2/posts?per_page=1), e imprima un resumen con los sitios que fallan. Adjúntalo o compártelo como enlace a un git.
 
