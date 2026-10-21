@@ -8,9 +8,8 @@
 
 las respuestas estan fundamentadas segun mi criterio con ejemplos de las posibles causas de los problemas, resoluciones y detalles tecnicos
 
-para ejecutar el script,
-
+## ejecutar el script
+```python
 uv run e-plus-medios
 ```
-
 
