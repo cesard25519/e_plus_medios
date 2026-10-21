@@ -40,7 +40,7 @@ def main() -> None:
         for f in fails:
             print(f'   - {f}')
 
-        exit(1)
+        raise SystemExit(1)
 
     print('\nTodos los sitios responden y publicaron en las ultimas 24 horas')
 
