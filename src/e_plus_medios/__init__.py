@@ -22,7 +22,9 @@ def main() -> None:
 
         for dom in domains:
             try:
-                VerifySite(client=client, domain=dom)
+                verify: VerifySite = VerifySite(client=client, domain=dom)
+                verify()
+
                 print(f'   [OK]   { dom }')
 
             except VerifySiteError as exc:

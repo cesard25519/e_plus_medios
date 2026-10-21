@@ -13,7 +13,7 @@ LIMIT_HOURS: int = 24
 
 class VerifySiteError(Exception):
     def __init__(self, domain: str, reason: str) -> None:
-        super().__init__( f'{ domain }\n   [ERROR]   ->   {reason}')
+        super().__init__( f'{ domain }\n   [ERROR]   ->   {reason}\n')
 
 
 class VerifySite(NamedTuple):
@@ -64,7 +64,7 @@ class VerifySite(NamedTuple):
         raise VerifySiteError(domain=self.domain, reason='no posts published')
 
 
-    def __must_valid_datetime(self, json_items: list[dict], fmt: str = '%Y-%m-%dT%H:%S') -> datetime:
+    def __must_valid_datetime(self, json_items: list[dict], fmt='%Y-%m-%dT%H:%M:%S') -> datetime:
         if date := json_items[0].get('date_gmt'):
             try:
                 d: datetime = datetime.strptime(date, fmt)
@@ -80,5 +80,5 @@ class VerifySite(NamedTuple):
         antique: timedelta = datetime.now(timezone.utc) - date
 
         if antique > timedelta(hours=LIMIT_HOURS):
-            raise VerifySiteError(domain=self.domain, reason=f'last post has { antique.total_seconds()/3600:.1f }h')
+            raise VerifySiteError(domain=self.domain, reason=f'last post has { int(antique.total_seconds()/3600) } hours')
 
