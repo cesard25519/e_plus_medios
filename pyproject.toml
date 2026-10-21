@@ -7,7 +7,15 @@ authors = [
     { name = "cesar", email = "cesard25519@gmail.com" }
 ]
 requires-python = ">=3.14"
-dependencies = []
+dependencies = [
+    "httpx>=0.28.1",
+]
+
+[tool.pyrefly]
+project-includes = [
+    "**/*.py*",
+    "**/*.ipynb",
+]
 
 [project.scripts]
 e-plus-medios = "e_plus_medios:main"
