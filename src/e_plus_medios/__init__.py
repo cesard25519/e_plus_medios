@@ -5,7 +5,8 @@ import httpx
 
 
 # from .main import VerifySite, TIMEOUT_SECS, VerifySiteError
-from .verify_site import verify_site, TIMEOUT_SECS, VerifySiteError
+# from .verify_site import verify_site, TIMEOUT_SECS, VerifySiteError
+from .script import verify_site, TIMEOUT_SECS, VerifySiteError
 
 
 DOMAINS_TEST: list[str] = [ # pruebas
