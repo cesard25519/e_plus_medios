@@ -4,7 +4,8 @@ from sys import argv as terminal_args
 import httpx
 
 
-from .main import VerifySite, TIMEOUT_SECS, VerifySiteError
+# from .main import VerifySite, TIMEOUT_SECS, VerifySiteError
+from .verify_site import verify_site, TIMEOUT_SECS, VerifySiteError
 
 
 DOMAINS_TEST: list[str] = [ # pruebas
@@ -22,9 +23,7 @@ def main() -> None:
 
         for dom in domains:
             try:
-                verify: VerifySite = VerifySite(client=client, domain=dom)
-                verify()
-
+                verify_site(client=client, domain=dom)
                 print(f'   [OK]   { dom }')
 
             except VerifySiteError as exc:

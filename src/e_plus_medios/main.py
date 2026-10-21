@@ -82,3 +82,4 @@ class VerifySite(NamedTuple):
         if antique > timedelta(hours=LIMIT_HOURS):
             raise VerifySiteError(domain=self.domain, reason=f'last post has { int(antique.total_seconds()/3600) } hours')
 
+
